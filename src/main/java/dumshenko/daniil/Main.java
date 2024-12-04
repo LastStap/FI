@@ -35,9 +35,9 @@ public class Main {
         Supplier<DayOfWeek> dayOfWeek = () -> LocalDate.now().getDayOfWeek();
         System.out.println(dayOfWeek.get());
 
-        Function<Double, Long> castingDoubleToLong = x -> x.longValue();
+        Function<Double, Long> castingDoubleToLong = Double::longValue;
 
-        Double ourTestNumber = 1200000000000001.12312312345;
+        Double ourTestNumber = 120000000000000001.12312312345;
         Long result = castingDoubleToLong.apply(ourTestNumber);
         System.out.println(result);
 
@@ -57,8 +57,10 @@ public class Main {
         Integer fibResult2 = calculateFibonacci.apply(13);
         System.out.println(fibResult1);
 
-        // TODO Реалізувати бінарний оператор.
+        BinaryOperator<Integer> calculateFibonacciSum = (x, y) -> calculateFibonacci.apply(x) + calculateFibonacci.apply(y);
 
-        BinaryOperator<Integer> calculateFibonacciSum = Integer::sum;
+        Integer sumOfFibResult = calculateFibonacciSum.apply(7, 13);
+        System.out.println(sumOfFibResult);
+        // BigDecimal <- Це анноташка для мене, мені буде зрозуміліше залишити його тут! <3 (це сердечко)
     }
 }

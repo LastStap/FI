@@ -5,6 +5,7 @@ package dumshenko.daniil;
 щоб створити умову для When та Then.
  Також в рядках 55 та 56,
 */
+
 import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
@@ -104,5 +105,30 @@ class MainTest {
         // Then
         assertEquals(13, fib7);
         assertEquals(233, fib13);
+    }
+
+    @Test
+    void shouldReturnSumOfTwoFibonacciNumbers() { // Цей тест вже сам написав на основі того, чому навчився, розібравши тести які написав за допомогою чату.
+        // Given
+        UnaryOperator<Integer> calculateFibonacci = x -> {
+            if (x == 0) return 0;
+            if (x == 1) return 1;
+
+            int a = 0, b = 1, fib = 0;
+            for (int i = 2; i <= x; i++) {
+                fib = a + b;
+                a = b;
+                b = fib;
+            }
+            return fib;
+        };
+
+        BinaryOperator<Integer> calculateFibonacciSum = (x, y) -> calculateFibonacci.apply(x) + calculateFibonacci.apply(y);
+
+        // When
+        Integer sumOfFibResult = calculateFibonacciSum.apply(7, 13);
+
+        // Then
+        assertEquals(246, sumOfFibResult);
     }
 }
